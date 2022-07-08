@@ -64,4 +64,15 @@ router.get('/getAuthList',[authMidddleware, mangerMiddleware], async(req, res) =
     return res.status(200).send({ author: result, status:'Success' })
 })
 
+router.delete('/', [authMidddleware, adminMiddleware], async(req, res) =>{
+    const { email }  = req.body
+    if(!email){
+        return res.status(400).send({ author: result, status:'Success', message: 'Email is required' })
+    }     
+    console.log(email)
+    const result = await Author.deleteOne({ email })
+    return res.status(200).send({ data: result, status:'Success', message: 'Author deleted successfully' })
+ 
+})
+
 export default router;
