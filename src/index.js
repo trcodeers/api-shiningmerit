@@ -32,7 +32,7 @@ const seedData = async() => {
       role:['Admin']
   })
   const result = await Author.updateOne({email}, { $setOnInsert: newAuthor}, { upsert: true})
-  if(result.upsertedCount === 0) logger.info('Required data already exist')
+  if(result.upsertedCount === 0) logger.warn('Required data already exist')
   logger.info('Data seeding operation completed')
 }
 

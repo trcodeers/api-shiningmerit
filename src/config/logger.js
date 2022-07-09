@@ -10,10 +10,11 @@ const logger = createLogger({
     level: 'silly',
     format: combine(
       timestamp({ format: "HH:mm:ss" }),
-      colorize(),
+      colorize({ all: true }),
       logFormat
-    ),
-    transports: [new transports.Console()]
-  });
+      ),
+    transports: [new transports.Console()],
+
+});
 
 export default logger;
