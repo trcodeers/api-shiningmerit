@@ -15,7 +15,7 @@ router.get('/getAllStates', async(req, res) =>{
 
 router.get('/getStatesList', async(req, res) =>{
 
-    const result = await IndianStates.find({}, { name: 1, }).sort({ name: 1 })
+    const result = await IndianStates.find({}, { name: 1, unionTerritories: 1 }).sort({ name: 1 })
     return res.status(200).send({ states: result, status: 'Success' })
 
 })
