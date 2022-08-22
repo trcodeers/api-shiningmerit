@@ -8,14 +8,14 @@ const router = express()
 
 router.get('/getAllStates', async(req, res) =>{
 
-    const result = await IndianStates.find()
+    const result = await IndianStates.find().sort({ name: 1 })
     return res.status(200).send({ states: result, status: 'Success' })
 
 })
 
 router.get('/getStatesList', async(req, res) =>{
 
-    const result = await IndianStates.find({}, { name: 1, })
+    const result = await IndianStates.find({}, { name: 1, }).sort({ name: 1 })
     return res.status(200).send({ states: result, status: 'Success' })
 
 })
