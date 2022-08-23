@@ -10,18 +10,17 @@ const router = express.Router();
 
 router.get('/tableTitles', async(req, res) =>{
 
-    const result = await Table.find({}, { title: 1 }).sort({ title: 1 })
+    const result = await Table.find({}, { title: 1, textToSearch: 1 }).sort({ title: 1 })
     return res.status(200).send({ value: result, status: 'Success' })
 
 })
 
 router.get('/tableValues/:title', async(req, res) => {
 
-    let { title } = req.params
-    if(!title) return res.status(200).send({ message: 'Id is required', status: 'Failed'})
+    let { textToSearch } = req.params
+    if(!textToSearch) return res.status(200).send({ message: 'Id is required', status: 'Failed'})
     
-    title = title.replaceAll('-', ' ')
-    const result = await Table.find({ title: title }, { title: 1, values: 1, columns: 1 })
+    const result = await Table.find({ textToSearch }, { title: 1, values: 1, columns: 1 })
    
     // Sort the table value against first key
     const val = result[0]?.values
@@ -40,9 +39,11 @@ router.post('/', [authMidddleware, adminMiddleware], async(req, res) =>{
     const { title } = req.body
     
     if(!title) return res.status(400).send({ message: 'Title is required' })
+    const textToSearch = title.toLocaleLowerCase().replaceAll('-', ' ').split(' ').join('-')
 
     const newTable = new Table({
         title,
+        textToSearch,
         values: [],
         columns: {}
     })
