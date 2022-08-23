@@ -4,6 +4,7 @@ import Table from "../models/table.js";
 import authMidddleware from "../middlewares/auth.js";
 import mangerMiddleware from "../middlewares/manager.js";
 import adminMiddleware from "../middlewares/admin.js";
+import sortTableValueByKey from "../utils/sortTableValueByKey.js";
 
 const router = express.Router();
 
@@ -20,16 +21,12 @@ router.get('/tableValues/:id', async(req, res) => {
     if(!id) return res.status(200).send({ message: 'Id is required', status: 'Failed'})
 
     const result = await Table.find({ _id: id }, { title: 1, values: 1, columns: 1 })
+   
+    // Sort the table value against first key
     const val = result[0].values
     const sortingKey = Object.keys(result[0].columns)[0]
-    val.sort(function(a, b) {
-        var keyA = a[sortingKey],
-          keyB = b[sortingKey]
-        if (keyA < keyB) return -1;
-        if (keyA > keyB) return 1;
-        return 0;
-      });
-    result['values'] = val  
+    result['values'] = sortTableValueByKey(val, sortingKey)  
+   
     return res.status(200).send({ tableValues: result[0], status: 'Success' })
 
 })

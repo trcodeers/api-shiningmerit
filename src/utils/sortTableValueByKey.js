@@ -1,13 +1,15 @@
 
 
-export default sortTableValueByKey = (arr, key) =>{
+const sortTableValueByKey = (arr, key) =>{
 
    return arr.sort((a, b) => {
-        const keyA = a[key]
-        const keyB = b[key]
-        if (keyA < keyB) return -1;
-        if (keyA > keyB) return 1;
+        const value1 = a[key]
+        const value2 = b[key]
+        if (value1 < value2) return -1;
+        if (value1 > value2) return 1;
         return 0;
-      });
+    });
 
 }
+
+export default sortTableValueByKey;
