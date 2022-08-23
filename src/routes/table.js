@@ -15,7 +15,7 @@ router.get('/tableTitles', async(req, res) =>{
 
 })
 
-router.get('/tableValues/:title', async(req, res) => {
+router.get('/tableValues/:textToSearch', async(req, res) => {
 
     let { textToSearch } = req.params
     if(!textToSearch) return res.status(200).send({ message: 'Id is required', status: 'Failed'})
