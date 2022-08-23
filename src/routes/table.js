@@ -24,8 +24,11 @@ router.get('/tableValues/:id', async(req, res) => {
    
     // Sort the table value against first key
     const val = result[0].values
-    const sortingKey = Object.keys(result[0].columns)[0]
-    result['values'] = sortTableValueByKey(val, sortingKey)  
+    const columnsList = result[0].columns
+    if(columnsList){
+        const sortingKey = Object.keys(columnsList)[0]
+        result['values'] = sortTableValueByKey(val, sortingKey)  
+    }
    
     return res.status(200).send({ tableValues: result[0], status: 'Success' })
 
