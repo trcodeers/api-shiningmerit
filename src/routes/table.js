@@ -9,7 +9,7 @@ const router = express.Router();
 
 router.get('/tableTitles', async(req, res) =>{
 
-    const result = await Table.find({}, { title: 1 })
+    const result = await Table.find({}, { title: 1 }).sort({ title: 1 })
     return res.status(200).send({ value: result, status: 'Success' })
 
 })
