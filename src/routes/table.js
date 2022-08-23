@@ -15,22 +15,23 @@ router.get('/tableTitles', async(req, res) =>{
 
 })
 
-router.get('/tableValues/:id', async(req, res) => {
+router.get('/tableValues/:title', async(req, res) => {
 
-    const { id } = req.params
-    if(!id) return res.status(200).send({ message: 'Id is required', status: 'Failed'})
-
-    const result = await Table.find({ _id: id }, { title: 1, values: 1, columns: 1 })
+    let { title } = req.params
+    if(!title) return res.status(200).send({ message: 'Id is required', status: 'Failed'})
+    
+    title = title.replaceAll('-', ' ')
+    const result = await Table.find({ title: title }, { title: 1, values: 1, columns: 1 })
    
     // Sort the table value against first key
-    const val = result[0].values
-    const columnsList = result[0].columns
+    const val = result[0]?.values
+    const columnsList = result[0]?.columns
     if(columnsList){
         const sortingKey = Object.keys(columnsList)[0]
         result['values'] = sortTableValueByKey(val, sortingKey)  
     }
    
-    return res.status(200).send({ tableValues: result[0], status: 'Success' })
+    return res.status(200).send({ tableValues: result[0] || [], status: 'Success' })
 
 })
 
