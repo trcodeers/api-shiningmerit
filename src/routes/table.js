@@ -22,8 +22,7 @@ router.get('/tableValues/:textToSearch', async(req, res) => {
     
     const result = await Table.find({ textToSearch }, { title: 1, values: 1, columns: 1 })
    
-    console.log(result)
-    if(!result){
+    if(!result[0]){
         return res.status(404).send({ message: 'Not found for this title', status: 'Failed'})
     }
 
