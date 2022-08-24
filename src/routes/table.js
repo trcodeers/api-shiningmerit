@@ -22,6 +22,11 @@ router.get('/tableValues/:textToSearch', async(req, res) => {
     
     const result = await Table.find({ textToSearch }, { title: 1, values: 1, columns: 1 })
    
+    console.log(result)
+    if(!result){
+        return res.status(404).send({ message: 'Not found for this title', status: 'Failed'})
+    }
+
     // Sort the table value against first key
     const val = result[0]?.values
     const columnsList = result[0]?.columns
@@ -30,7 +35,7 @@ router.get('/tableValues/:textToSearch', async(req, res) => {
         result['values'] = sortTableValueByKey(val, sortingKey)  
     }
    
-    return res.status(200).send({ tableValues: result[0] || [], status: 'Success' })
+    return res.status(200).send({ tableValues: result[0] || {} , status: 'Success' })
 
 })
 
