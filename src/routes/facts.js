@@ -21,6 +21,13 @@ router.get('/admin/:pageNo', [authMiddleware, mangerMiddleware], async(req, res)
     res.status(200).send({ status: 'Success', result })
 })
 
+router.get('/userSuggested', [authMiddleware, mangerMiddleware], async(req, res) =>{
+    
+    const result = Fact.find({ usreSuggested: true })
+    res.status(200).send({ status: 'Success', result })
+
+})
+
 router.post('/', [authMiddleware, mangerMiddleware], async(req, res) => {
     const { text, category } = req.body
     if(!text) return res.status(400).send({ status: 'Failed', message: 'Input invalid' })
@@ -34,7 +41,26 @@ router.post('/', [authMiddleware, mangerMiddleware], async(req, res) => {
 
 })
 
+router.post('/user', async(req, res) => {
+    const { text, category } = req.body
+    if(!text) return res.status(400).send({ status: 'Failed', message: 'Input invalid' })
+   
+   const existingCount = await Fact.countDocuments({ userSuggested: true })
 
+   if(existingCount > 40){
+    return res.status(400).send({ status: 'Failed', message: 'Please try after sometime' })
+   }
+
+    const newFact = new Fact({
+        text,
+        category,
+        userSuggested: true
+    })
+
+    const result = await newFact.save()
+    return res.status(200).send({result})
+
+})
 
 
 export default router;

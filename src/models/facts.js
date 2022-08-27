@@ -10,7 +10,11 @@ const factsSchema = new mongoose.Schema({
    category:{
         type: String,
         trim: true,
+   },
+   userSuggested:{
+        type: Boolean
    }
+   
 })
 
 
