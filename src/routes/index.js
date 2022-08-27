@@ -7,6 +7,7 @@ import tableRoute from "./table.js"
 import authRoute from "./auth.js"
 import indianStatesRoute from "./indianStates.js"
 import userRoute from "./user.js";
+import factsRoute from "./facts.js";
 
 const router = express.Router();
 
@@ -17,6 +18,8 @@ router.use('/tables', tableRoute)
 router.use('/indianStates', indianStatesRoute)
 router.use('/auth', authRoute)
 router.use('/user', userRoute)
+router.use('/facts', factsRoute)
+
 
 
 export default router;
