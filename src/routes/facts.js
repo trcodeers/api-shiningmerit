@@ -23,7 +23,7 @@ router.get('/admin/:pageNo', [authMiddleware, mangerMiddleware], async(req, res)
 
 router.get('/userSuggested', [authMiddleware, mangerMiddleware], async(req, res) =>{
     
-    const result = Fact.find({ usreSuggested: true })
+    const result = await Fact.find({ userSuggested: true })
     res.status(200).send({ status: 'Success', result })
 
 })
