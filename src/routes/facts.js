@@ -17,6 +17,10 @@ router.get('/admin/:pageNo', [authMiddleware, mangerMiddleware], async(req, res)
     
     const pageLimit = 20
     const { pageNo } = req.params
+    let totalCount
+    if(pageNo === 0){
+        totalCount = await Fact.countDocuments({ userSuggested: true })
+    }
     const result = await Fact.find({}).limit(pageLimit).skip(pageNo  * pageLimit)
     res.status(200).send({ status: 'Success', result })
 })
@@ -24,7 +28,7 @@ router.get('/admin/:pageNo', [authMiddleware, mangerMiddleware], async(req, res)
 router.get('/userSuggested', [authMiddleware, mangerMiddleware], async(req, res) =>{
     
     const result = await Fact.find({ userSuggested: true })
-    res.status(200).send({ status: 'Success', result })
+    res.status(200).send({ status: 'Success', result, totalCount })
 
 })
 
