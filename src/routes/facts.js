@@ -6,10 +6,16 @@ import Fact from "../models/facts.js";
 const router = express.Router();
 
 router.get('/user/', async(req, res) =>{
+   
+    // const randomNo = Math.floor((Math.random() * 25) + 1);
+    // const result = await Fact.find({}).limit(5).skip(randomNo)
 
-    const randomNo = Math.floor((Math.random() * 25) + 1);
-    const result = await Fact.find({}).limit(5).skip(randomNo)
+    const result = await Fact.find({  
+        $expr: { $lt: [0.7, {$rand: {} } ] }
+    }).limit(6)
+    
     res.status(200).send({ status: 'Success', result })
+
 })
 
 // pageNo: min is 0
