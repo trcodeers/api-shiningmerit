@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.get('/user/', async(req, res) =>{
 
-    const randomNo = Math.floor((Math.random() * 10) + 1);
+    const randomNo = Math.floor((Math.random() * 25) + 1);
     const result = await Fact.find({}).limit(5).skip(randomNo)
     res.status(200).send({ status: 'Success', result })
 })
