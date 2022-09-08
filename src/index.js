@@ -8,10 +8,12 @@ import logger from './config/logger.js';
 import Author from "./models/author.js";
 import hash from "./utils/hash.js";
 
+console.log(process.env.NODE_ENV)
+
 if(server.mongoose.url){
   mongoose.connect(server.mongoose.url, server.mongoose.options).then(() => {
     logger.info('Connected to MongoDB');
-    seedData()
+    if(process.env.NODE_ENV !== 'development') seedData()
 
   });
 }
