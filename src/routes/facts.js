@@ -12,7 +12,7 @@ router.get('/user/', async(req, res) =>{
 
     const result = await Fact.find({  
         $expr: { $lt: [0.7, {$rand: {} } ] }
-    }).limit(6)
+    }).limit(5)
     
     res.status(200).send({ status: 'Success', result })
 
