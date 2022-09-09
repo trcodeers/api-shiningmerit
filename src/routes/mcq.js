@@ -2,9 +2,12 @@ import express from "express";
 import MCQ from "../models/mcq.js";
 import MCQValidate from "../validations/mcq.js";
 
+import authMidddleware from "../middlewares/auth.js";
+import mangerMiddleware from "../middlewares/manager.js";
+
 const router = express()
 
-router.post('/', async(req, res) =>{
+router.post('/', [authMidddleware, mangerMiddleware], async(req, res) =>{
 
     const { question, options, rightAnswer } = req.body
 
