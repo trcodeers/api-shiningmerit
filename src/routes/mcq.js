@@ -9,7 +9,7 @@ const router = express()
 
 router.post('/', [authMidddleware, mangerMiddleware], async(req, res) =>{
 
-    const { question, options, rightAnswer } = req.body
+    const { questionText, options, rightAnswer } = req.body
 
     const { error } = MCQValidate(req.body)
     if(error){
@@ -20,7 +20,7 @@ router.post('/', [authMidddleware, mangerMiddleware], async(req, res) =>{
     const newQuestion = new MCQ({
                 question: { 
                     en: {
-                        question, 
+                        questionText, 
                         options, 
                         rightAnswer
                     }

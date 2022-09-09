@@ -4,7 +4,7 @@ const mcqSchema = new mongoose.Schema({
     
     question:{
         en:{
-            question: { type: String, trim: true, unique: true },
+            questionText: { type: String, trim: true, unique: true },
             options: { type: Array },
             rightAnswer: { type: Number },
         },
