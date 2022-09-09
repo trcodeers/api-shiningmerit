@@ -12,7 +12,6 @@ const factsSchema = new mongoose.Schema({
                     type: String, 
                     trim: true,
                }],
-          trim: true,
    },
    userSuggested:{
         type: Boolean
