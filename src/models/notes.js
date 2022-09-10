@@ -11,6 +11,10 @@ const notesSchema = new mongoose.Schema({
         type: [{ 
             text: { type: String, trim: true, }
         }],
+    },
+    sorting: {
+        type: Boolean,
+        default: true
     }
 })
 

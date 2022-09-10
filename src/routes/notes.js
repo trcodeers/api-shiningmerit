@@ -9,7 +9,7 @@ const router = express.Router();
 router.get('/:title', async(req, res) =>{
   
     const { title } = req.params
-    if(!title) return res.status(400).send({ message: 'Invalid route', status: 'Failed'})
+    if(!title) return res.status(400).send({ message: 'Invalid route', status: 'Failed' })
     
     const result = await Notes.find({ title: title })
     res.status(200).send({ notes: result[0] || {}, status: 'Success'})

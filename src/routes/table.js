@@ -29,7 +29,8 @@ router.get('/tableValues/:textToSearch', async(req, res) => {
     // Sort the table value against first key
     const val = result[0]?.values
     const columnsList = result[0]?.columns
-    if(columnsList){
+    
+    if(result[0]?.sorting && columnsList){
         const sortingKey = Object.keys(columnsList)[0]
         result['values'] = sortTableValueByKey(val, sortingKey)  
     }
