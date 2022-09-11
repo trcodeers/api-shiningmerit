@@ -9,6 +9,7 @@ import Author from "./models/author.js";
 import hash from "./utils/hash.js";
 
 if(server.mongoose.url){
+  logger.info('Connecting mongoDB...')
   mongoose.connect(server.mongoose.url, server.mongoose.options).then(() => {
     logger.info('Connected to MongoDB');
     if(process.env.NODE_ENV !== 'development') seedData()
