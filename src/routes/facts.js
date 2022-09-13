@@ -5,16 +5,17 @@ import Fact from "../models/facts.js";
 
 const router = express.Router();
 
-router.get('/user/', async(req, res) =>{
+router.post('/shorts', async(req, res) =>{
    
-    // const randomNo = Math.floor((Math.random() * 25) + 1);
-    // const result = await Fact.find({}).limit(5).skip(randomNo)
-
-    const result = await Fact.find({  
-        $expr: { $lt: [0.7, {$rand: {} } ] }
-    }).limit(5)
+    const { counts } = req.body
     
-    res.status(200).send({ status: 'Success', result })
+    if(!Array.isArray(counts)){
+        return res.status(400).send({ status: 'Failed', message: 'Invalid request' })
+    }
+
+    const result = await Fact.find({ count: counts })
+
+    return res.status(200).send({ status: 'Success', result })
 
 })
 
@@ -39,11 +40,15 @@ router.get('/userSuggested', [authMiddleware, mangerMiddleware], async(req, res)
 })
 
 router.post('/', [authMiddleware, mangerMiddleware], async(req, res) => {
-    const { text, category } = req.body
+    
+    const { text, category, count } = req.body
+    
     if(!text) return res.status(400).send({ status: 'Failed', message: 'Input invalid' })
+    
     const newFact = new Fact({
         text,
-        category
+        category,
+        count
     })
 
     const result = await newFact.save()

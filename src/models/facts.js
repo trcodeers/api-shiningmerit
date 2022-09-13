@@ -7,15 +7,20 @@ const factsSchema = new mongoose.Schema({
         trim: true,
         unique: true
     },
-   category:{
+    category:{
           type: [{ 
                     type: String, 
                     trim: true,
                }],
    },
-   userSuggested:{
+    userSuggested:{
         type: Boolean
-   }
+   },
+    count: {
+        type: String,
+        unique: true,
+        // required: true
+    }
    
 })
 
