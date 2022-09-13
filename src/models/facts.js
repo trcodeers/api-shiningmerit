@@ -19,7 +19,7 @@ const factsSchema = new mongoose.Schema({
     count: {
         type: String,
         unique: true,
-        // required: true
+        required: true
     }
    
 })
