@@ -9,14 +9,6 @@ import error from "./middlewares/error.js";
 
 const app = express()
 
-// To avoid the CORS error
-app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers","Origin, X-Requested-With, Content-Type,Accept, Authortization, x-auth-token");  
-    res.header("Access-Control-Allow-Methods","*")
-    next()
-})
-
 // set security HTTP headers
 app.use(helmet());
 
@@ -31,8 +23,23 @@ app.use(xss());
 app.use(mongoSanitize());
 
 // enable cors
-app.use(cors());
-app.options('*', cors());
+app.use((req, res, next) => {
+
+    if(!process.env.NODE_ENV === 'development' && !req.get('origin')){
+        
+        return 
+    } 
+
+    next()
+
+});
+
+const whiteList = ['https://user-shiningmerit.herokuapp.com/', 'https://shiningmerit.com/']
+if(process.env.NODE_ENV === 'development') whiteList.push('http://localhost:3000/')
+
+app.use(cors({
+    origin: whiteList
+}));
 
 // v1 api routes
 app.use('/api/v1', routes);
