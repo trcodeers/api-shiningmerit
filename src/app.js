@@ -29,16 +29,15 @@ app.use((req, res, next) => {
         
         return 
     } 
-
     next()
 
 });
 
-const whiteList = ['https://user-shiningmerit.herokuapp.com/', 'https://shiningmerit.com/']
-if(process.env.NODE_ENV === 'development') whiteList.push('http://localhost:3000/')
+const whiteList = [ 'https://user-shiningmerit.herokuapp.com/', 'https://shiningmerit.com/']
+const whiteList2 = ['http://localhost:3000', 'https://user-shiningmerit.herokuapp.com/', 'https://shiningmerit.com/']
 
 app.use(cors({
-    origin: whiteList
+    origin: process.env.NODE_ENV === 'development' ?  whiteList2 : whiteList
 }));
 
 // v1 api routes
