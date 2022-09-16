@@ -33,11 +33,10 @@ console.log(req.get('origin'))
 
 });
 
-const whiteList = ['https://user-shiningmerit.herokuapp.com/', 'https://shiningmerit.com/']
-const whiteList2 = ['http://localhost:3000', 'https://user-shiningmerit.herokuapp.com/', 'https://shiningmerit.com/']
+const whiteList = ['http://localhost:3000', 'https://admin-shiningmerit.herokuapp.com', 'https://user-shiningmerit.herokuapp.com', 'https://shiningmerit.com']
 
 app.use(cors({
-    origin: ['http://localhost:3000', 'https://user-shiningmerit.herokuapp.com', 'https://shiningmerit.com']
+    origin: whiteList
 }));
 
 // v1 api routes
