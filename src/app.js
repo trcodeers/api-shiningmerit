@@ -37,7 +37,7 @@ const whiteList = [ 'https://user-shiningmerit.herokuapp.com/', 'https://shining
 const whiteList2 = ['http://localhost:3000', 'https://user-shiningmerit.herokuapp.com/', 'https://shiningmerit.com/']
 
 app.use(cors({
-    origin: ['http://localhost:3000', 'http://user-shiningmerit.herokuapp.com/', 'http://shiningmerit.com/']
+    origin: ['http://localhost:3000', 'http://user-shiningmerit.herokuapp.com', 'http://shiningmerit.com']
 }));
 
 // v1 api routes
