@@ -25,10 +25,10 @@ app.use(mongoSanitize());
 // enable cors
 app.use((req, res, next) => {
 
-    // if(!process.env.NODE_ENV === 'development' && !req.get('origin')){
+    if(!process.env.NODE_ENV === 'development' && !req.get('origin')){
         
-    //     return 
-    // } 
+        return 
+    } 
     next()
 
 });
