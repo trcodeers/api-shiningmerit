@@ -22,8 +22,8 @@ router.post('/', [authMidddleware, mangerMiddleware], async(req, res) =>{
                     en: {
                         questionText, 
                         options, 
-                        rightAnswer
-                    }
+                    },
+                    rightAnswer
                 },
                 tags
             })

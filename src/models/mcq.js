@@ -6,8 +6,8 @@ const mcqSchema = new mongoose.Schema({
         en:{
             questionText: { type: String, trim: true, unique: true },
             options: { type: Array },
-            rightAnswer: { type: String },
         },
+        rightAnswer: { type: String }
     },
 
     tags:{
