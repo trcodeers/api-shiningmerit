@@ -33,4 +33,13 @@ router.post('/', [authMidddleware, mangerMiddleware], async(req, res) =>{
     return res.status(200).send({ message: 'Success', result: result })
 })
 
+
+router.get('/mcqCount', [],  async(req, res) => {
+
+    const result = await MCQ.find({ tags: 'Regular' }).count()
+
+    return res.status(200).send({ message: 'Success', result })
+
+})
+
 export default router;
