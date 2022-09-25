@@ -37,9 +37,14 @@ router.post('/', [authMidddleware, mangerMiddleware], async(req, res) =>{
 
 router.get('/mcqCount', [],  async(req, res) => {
 
-    // const result = await MCQ.find({ $group : { _id : "$tags" } })
+    const distinctTags = await MCQ.distinct('tags')
+    const result = []
+    for (let index = 0; index < distinctTags.length; index++) {
+        console.log(result)
+        const val = await MCQ.find({ tags: distinctTags[index] }).count()
+        result.push({ title: distinctTags[index], value: val })
+    }
 
-   const result = Tags.map((el, index) =>  ({ title: el, value: 200 }))
     return res.status(200).send({ message: 'Success', result })
 
 })
