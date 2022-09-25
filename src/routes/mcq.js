@@ -34,7 +34,6 @@ router.post('/', [authMidddleware, mangerMiddleware], async(req, res) =>{
     return res.status(200).send({ message: 'Success', result: result })
 })
 
-
 router.get('/mcqCount', [authMidddleware, mangerMiddleware],  async(req, res) => {
 
     const distinctTags = await MCQ.distinct('tags')
@@ -48,6 +47,26 @@ router.get('/mcqCount', [authMidddleware, mangerMiddleware],  async(req, res) =>
 
     return res.status(200).send({ message: 'Success', result })
 
+})
+
+router.get('/getTagsValue', async(req, res) =>{
+
+    const result = await MCQ.distinct('tags')
+
+    return res.status(200).send({ message: 'Success', result })
+
+})
+
+router.post('/user', async(req, res) =>{
+
+    const { tags }= req.body
+    if(!Array.isArray(tags)){
+        return res.status(400).send({ status: 'Failed', message: 'Invalid request' })
+    }
+
+    const result = await MCQ.find({ tags: tags })
+
+    return res.status(200).send({ message: 'Success', result })
 })
 
 export default router;
