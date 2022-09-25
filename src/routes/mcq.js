@@ -4,6 +4,7 @@ import MCQValidate from "../validations/mcq.js";
 
 import authMidddleware from "../middlewares/auth.js";
 import mangerMiddleware from "../middlewares/manager.js";
+import Tags from "../constant/mcqTags.js";
 
 const router = express()
 
@@ -38,6 +39,7 @@ router.get('/mcqCount', [],  async(req, res) => {
 
     const result = await MCQ.find({ tags: 'Regular' }).count()
 
+    Tags.map((el, index) =>  ({ title: el, value: 200 }))
     return res.status(200).send({ message: 'Success', result })
 
 })
