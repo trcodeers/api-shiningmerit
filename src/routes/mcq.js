@@ -63,8 +63,8 @@ router.post('/user', async(req, res) =>{
     if(!Array.isArray(tags)){
         return res.status(400).send({ status: 'Failed', message: 'Invalid request' })
     }
-
-    const result = await MCQ.find({ tags: tags })
+    
+    const result = await MCQ.find({ tags: { $in: tags } } )
 
     return res.status(200).send({ message: 'Success', result })
 })
