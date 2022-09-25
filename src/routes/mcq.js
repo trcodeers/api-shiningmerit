@@ -37,7 +37,7 @@ router.post('/', [authMidddleware, mangerMiddleware], async(req, res) =>{
 
 router.get('/mcqCount', [],  async(req, res) => {
 
-    const result = await MCQ.find({ tags: 'Regular' }).count()
+    // const result = await MCQ.find({ $group : { _id : "$tags" } })
 
     Tags.map((el, index) =>  ({ title: el, value: 200 }))
     return res.status(200).send({ message: 'Success', result })
