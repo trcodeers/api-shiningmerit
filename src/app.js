@@ -32,7 +32,7 @@ app.use((req, res, next) => {
 
 });
 
-const whiteList = ['http://localhost:3000', 'https://admin-shiningmerit.herokuapp.com', 'https://user-shiningmerit.herokuapp.com', 'https://shiningmerit.com']
+const whiteList = ['http://localhost:3000','https://user-shiningmerit.up.railway.app', 'https://admin-shiningmerit.herokuapp.com', 'https://user-shiningmerit.herokuapp.com', 'https://shiningmerit.com']
 
 app.use(cors({
     origin: whiteList
