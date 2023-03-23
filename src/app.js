@@ -32,10 +32,10 @@ app.use((req, res, next) => {
 
 });
 
-const whiteList = ['http://localhost:3000','https://user-shiningmerit.up.railway.app', 'https://admin-shiningmerit.herokuapp.com', 'https://user-shiningmerit.herokuapp.com', 'https://shiningmerit.com']
+const whiteList = ['https://glittering-daffodil-8084d8.netlify.app','http://localhost:3000', 'https://admin-shiningmerit.herokuapp.com', 'https://user-shiningmerit.herokuapp.com', 'https://shiningmerit.com']
 
 app.use(cors({
-    origin: whiteList
+    origin: '*'
 }));
 
 // v1 api routes
