@@ -9,8 +9,11 @@ import indianStatesRoute from "./indianStates.js"
 import userRoute from "./user.js";
 import factsRoute from "./facts.js";
 import mcqRoute from "./mcq.js";
+import basicRoute from "./basic.js";
 
 const router = express.Router();
+
+router.use('/', basicRoute)
 
 router.use('/days', daysRoute)
 router.use('/topics', topicRoute)
